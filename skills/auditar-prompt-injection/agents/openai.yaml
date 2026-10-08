@@ -1,0 +1,8 @@
+interface:
+  display_name: "Auditar Prompt Injection"
+  short_description: "Triagem de instruções hostis em documentos"
+  default_prompt: "Use $auditar-prompt-injection para verificar os documentos antes da análise processual."
+
+policy:
+  allow_implicit_invocation: true
+

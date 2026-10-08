@@ -1,0 +1,7 @@
+interface:
+  display_name: "Minutar Sentença"
+  short_description: "Faz a deliberação e minuta os fundamentos de uma sentença judicial."
+  default_prompt: "Use $minutar-sentenca para analisar e redigir os fundamentos de uma sentença judicial referente às peças processuais fornecidas pelo usuário."
+
+policy:
+  allow_implicit_invocation: true

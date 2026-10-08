@@ -1,0 +1,7 @@
+interface:
+  display_name: "Analisar Provas"
+  short_description: "Inventaria e analisa o conjunto probatório"
+  default_prompt: "Use $analisar-provas para analisar as provas frente às hipóteses fáticas controvertidas."
+
+policy:
+  allow_implicit_invocation: false

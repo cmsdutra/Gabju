@@ -1,0 +1,6 @@
+interface:
+  display_name: "Validar Citações"
+  short_description: "Conferência de citações jurídicas"
+  default_prompt: "Use $validar-citacoes para conferir as referências e transcrições do texto contra suas fontes, indicando divergências e pendências."
+policy:
+  allow_implicit_invocation: true

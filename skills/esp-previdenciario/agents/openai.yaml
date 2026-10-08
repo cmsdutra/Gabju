@@ -1,0 +1,7 @@
+interface:
+  display_name: "Especialista em Direito Previdenciário"
+  short_description: "Confere CNIS, tempo de contribuição e RMI"
+  default_prompt: "Use $esp-previdenciario para analisar este CNIS e conferir os cálculos previdenciários."
+
+policy:
+  allow_implicit_invocation: true

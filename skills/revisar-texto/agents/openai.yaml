@@ -1,0 +1,6 @@
+interface:
+  display_name: "Revisar Texto"
+  short_description: "Revisão de texto e minutas"
+  default_prompt: "Revise o texto jurídico ou minuta com base nos critérios de estilo e coerência de $revisar-texto."
+policy:
+  allow_implicit_invocation: true

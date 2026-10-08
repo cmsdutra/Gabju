@@ -1,0 +1,28 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "gabju",
+  "version": "0.6.0",
+  "description": "Fluxos autocontidos para análise processual e elaboração de minutas judiciais em gabinetes.",
+  "author": {
+    "name": "gabju"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "gabju",
+        "shortDescription": "Análise e minutas judiciais",
+        "longDescription": "Analisa peças e provas, estrutura controvérsias e elabora relatórios, despachos, decisões, sentenças e cálculos judiciais a partir dos arquivos anexados à conversa.",
+        "developerName": "gabju",
+        "category": "Productivity",
+        "capabilities": [
+          "Interactive"
+        ],
+        "defaultPrompt": [
+          "Analise os documentos processuais anexados e indique a skill adequada.",
+          "Prepare uma minuta judicial com base nas peças e nas orientações fornecidas.",
+          "Revise a análise do processo e aponte informações ausentes antes de redigir."
+        ]
+      }
+    }
+  }
+}

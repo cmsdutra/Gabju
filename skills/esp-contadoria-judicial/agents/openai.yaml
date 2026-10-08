@@ -1,0 +1,7 @@
+interface:
+  display_name: "Especialista em Contadoria Judicial"
+  short_description: "Cálculos e consultas de contadoria judicial federal"
+  default_prompt: "Use $esp-contadoria-judicial para conferir a correção monetária e os juros deste cálculo."
+
+policy:
+  allow_implicit_invocation: true

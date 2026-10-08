@@ -1,0 +1,7 @@
+interface:
+  display_name: "Analisar Controvérsias"
+  short_description: "Destaca as controvérsias a resolver na tarefa"
+  default_prompt: "Use $analisar-controversias para mapear os pontos controvertidos da tarefa ativa."
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Minutar Saneamento"
+  short_description: "Analisa e minuta decisão de saneamento processual."
+  default_prompt: "Use $minutar-saneamento para analisar e redigir minuta de decisão de saneamento e organização do processo referente às peças processuais fornecidas pelo usuário."
+
+policy:
+  allow_implicit_invocation: true

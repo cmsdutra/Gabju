@@ -1,0 +1,7 @@
+interface:
+  display_name: "Minutar Dispositivo"
+  short_description: "Redige DELIBERAÇÃO JUDICIAL e PROVIDÊNCIAS DE IMPULSO"
+  default_prompt: "Use $minutar-dispositivo para redigir a DELIBERAÇÃO JUDICIAL e as PROVIDÊNCIAS DE IMPULSO PROCESSUAL desta minuta."
+
+policy:
+  allow_implicit_invocation: true

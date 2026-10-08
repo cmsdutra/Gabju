@@ -1,0 +1,7 @@
+interface:
+  display_name: "Minutar Relatório Geral"
+  short_description: "Redige o relatório de minutas de decisões e sentenças"
+  default_prompt: "Use $minutar-relatorio-geral para redigir o relatório da minuta de decisão ou sentença conforme as peças fornecidas."
+
+policy:
+  allow_implicit_invocation: true

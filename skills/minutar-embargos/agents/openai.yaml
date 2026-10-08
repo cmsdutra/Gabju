@@ -1,0 +1,7 @@
+interface:
+  display_name: "Minutar Embargos"
+  short_description: "Redige minuta de decisão em embargos de declaração"
+  default_prompt: "Use $minutar-embargos para redigir a minuta de decisão em embargos de declaração referente às peças processuais fornecidas."
+
+policy:
+  allow_implicit_invocation: true

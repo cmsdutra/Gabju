@@ -1,0 +1,7 @@
+interface:
+  display_name: "Minutar Despacho"
+  short_description: "Redige despachos judiciais objetivos"
+  default_prompt: "Use $minutar-despacho para redigir uma minuta de despacho conforme as peças e orientações fornecidas."
+
+policy:
+  allow_implicit_invocation: true

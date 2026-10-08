@@ -1,0 +1,7 @@
+interface:
+  display_name: "Indexar PDF"
+  short_description: "Recupera PDFs com dificuldade real de leitura"
+  default_prompt: "Use $indexar-pdf se a leitura direta do PDF anexado apresentar dificuldade concreta."
+
+policy:
+  allow_implicit_invocation: true

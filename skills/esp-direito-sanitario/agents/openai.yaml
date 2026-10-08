@@ -1,0 +1,7 @@
+interface:
+  display_name: "Especialista em Direito Sanitário"
+  short_description: "Minutar ações de saúde pública envolvendo SUS."
+  default_prompt: "Use $esp-direito-sanitario para analisar e minutar ações de fornecimento de medicamento, tratamento ou tecnologia de saúde pelo SUS."
+
+policy:
+  allow_implicit_invocation: true

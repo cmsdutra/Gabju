@@ -1,0 +1,7 @@
+interface:
+  display_name: "Minutar Interlocutória"
+  short_description: "Analisa e minuta fundamentos de decisão interlocutória."
+  default_prompt: "Use $minutar-interlocutoria para analisar e redigir a fundamentação de decisão interlocutória geral referente às peças processuais fornecidas pelo usuário."
+
+policy:
+  allow_implicit_invocation: true

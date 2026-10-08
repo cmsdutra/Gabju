@@ -1,0 +1,7 @@
+interface:
+  display_name: "Minutar Tutela"
+  short_description: "Analisa e minuta fundamentos de decisão sobre tutela provisória."
+  default_prompt: "Use $minutar-tutela para analisar e redigir a fundamentação de decisão sobre tutela provisória referente às peças processuais fornecidas pelo usuário."
+
+policy:
+  allow_implicit_invocation: true
