@@ -22,4 +22,4 @@ A Secretaria da Vara deverá:
 
 **(iii)** por fim, **concluir** os autos para decisão.
 
-[LOCALIDADE/UF], data do sistema.
+[LOCALIDADE/UF], data de assinatura do sistema.

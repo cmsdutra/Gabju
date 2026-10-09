@@ -1,0 +1,7 @@
+interface:
+  display_name: "Minuta Completa"
+  short_description: "Relatório, fundamentação e dispositivo integrados"
+  default_prompt: "Use $minutar-completa para redigir a minuta completa da decisão, com relatório, fundamentação e dispositivo."
+
+policy:
+  allow_implicit_invocation: true

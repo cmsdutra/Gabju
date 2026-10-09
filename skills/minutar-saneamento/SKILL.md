@@ -1,6 +1,6 @@
 ---
 name: minutar-saneamento
-description: "Redige decisão de saneamento e organização do processo: resolve questões pendentes, fixa controvérsias, distribui ônus da prova e delibera sobre provas. Use mediante invocação expressa ou pedido de saneamento."
+description: "Redige decisão completa de saneamento e organização do processo por padrão; partes isoladas somente quando expressamente solicitadas: resolve questões pendentes, fixa controvérsias, distribui ônus da prova e delibera sobre provas. Use mediante invocação expressa ou pedido de saneamento."
 ---
 
 # /minutar-saneamento
@@ -12,6 +12,15 @@ Leia [personalização do gabinete](../../references/personalizacao.md) ao aplic
 ## Leitura dos anexos
 
 Quando precisar consultar anexos, tente primeiro a leitura direta. Se houver dificuldade concreta que impeça acessar o conteúdo necessário, acione $indexar-pdf somente para os PDFs afetados, informando a dificuldade observada. Tamanho e quantidade de páginas isolados não justificam indexação. Reutilize os textos recuperados e os diagnósticos ao retomar esta skill, preservando seu escopo e checkpoints.
+
+## Escopo da entrega
+
+Pedidos para minutar, redigir, elaborar ou preparar este ato produzem, por padrão, a minuta completa, mesmo sem as palavras "completa", "integral" ou "inteira". A invocação desta skill pelo nome também segue esse padrão. Conduza esses pedidos pelo $minutar-completa.
+
+Entregue partes isoladas apenas quando o usuário delimitar expressamente o escopo, por exemplo, "redija a fundamentação", "somente o relatório", "apenas o dispositivo" ou "relatório e fundamentação, sem dispositivo". Pedidos exclusivos de análise ou julgamento não iniciam a redação de uma minuta sem solicitação. Preserve os checkpoints de deliberação e de plano de argumentação.
+
+Quando chamada por $minutar-completa, execute apenas a etapa atribuída, devolva o texto à skill coordenadora e não a acione novamente. Na execução parcial, redija somente as seções solicitadas, ainda que o template contenha outras seções.
+
 
 Esta skill conduz a elaboração de minuta de decisão de saneamento e organização do processo, de acordo com o art. 357 do Código de Processo Civil, templates e regras de estilo especificadas.
 
@@ -236,13 +245,13 @@ Orientações:
 1. Antes de iniciar a redação, carregue e leia atentamente as regras de estilo definidas em `references/regras-de-estilo.md` e o template em `assets/template-saneamento.md`.
 2. Consulte os exemplos em `assets/exemplos/`, se existentes e pertinentes ao tipo de controvérsia, para calibrar a estrutura da deliberação judicial e das providências de impulso.
 3. Siga a estrutura do template, preenchendo cada bloco conforme as instruções nele contidas, observando as regras de estilo e o plano aprovado na Etapa 2, utilizando-o como guia sem citá-lo como fonte.
-4. Redija relatório breve apenas na extensão necessária para contextualizar a decisão de saneamento.
+4. Redija relatório breve apenas na extensão necessária para contextualizar a decisão de saneamento, desde que essa seção esteja no escopo solicitado. Se o relatório já tiver sido produzido por $minutar-completa, não redija outro.
 5. Resolva as questões processuais pendentes antes de declarar saneado o processo.
 6. Fixe controvérsias de fato e de direito de modo objetivo, evitando transformar a seção em fundamentação de mérito.
 7. Delimite o ônus da prova por fatos ou grupos de fatos, quando necessário.
 8. Delibere sobre provas de forma motivada, indicando pertinência, utilidade e necessidade.
 9. Em caso de deferimento de perícia, siga o padrão do template: fundamentação breve na seção de dilação probatória; detalhamento em subitens da deliberação judicial e providências de impulso correspondentes ao fluxo aplicável — (i) parte pleiteante NÃO beneficiária da gratuidade da justiça: nomeação direta do perito, honorários adiantados pela parte, prazo de laudo e quesitos na deliberação judicial, providências de intimação das partes, aceite do perito, proposta de honorários, manifestação e conclusão para arbitramento; (ii) parte pleiteante beneficiária da gratuidade da justiça: sem nomeação direta de perito, fixação dos honorários no teto da Resolução CJF 305/2014, remessa ao NUCOD para designação da perícia e formulação dos quesitos do Juízo já na deliberação, providências de intimação das partes para quesitos/assistentes técnicos, encaminhamento ao NUCOD, abertura de vista após o laudo e conclusão para julgamento. Consulte `assets/exemplos/ex-contrato-bancario-anatocismo-pericia-ajg.md` para calibrar o fluxo (ii).
-10. Inclua deliberação judicial e providências de impulso processual quando o usuário pedir minuta completa ou quando o template exigir esses blocos. Nas providências de impulso, formule comandos diretos com o verbo operacional em destaque, quando compatível com o padrão da minuta, e evite repetir deliberação já feita em decisão anterior — se a providência anterior ainda não tiver sido cumprida, referencie-a apenas na seção de providências de impulso. Para as fórmulas fora do fluxo de perícia (AJG geral, honorários, custas etc.), consulte `minutar-dispositivo/references/circunstancias.md`; regras de heading/numeração/caixa do verbo → `minutar-dispositivo/references/estrutura.md`.
+10. Inclua deliberação judicial e providências de impulso processual na minuta completa ou quando essas seções forem expressamente solicitadas. Se o usuário limitar o pedido à fundamentação, omita esses blocos mesmo que constem do template. Nas providências de impulso, formule comandos diretos com o verbo operacional em destaque, quando compatível com o padrão da minuta, e evite repetir deliberação já feita em decisão anterior — se a providência anterior ainda não tiver sido cumprida, referencie-a apenas na seção de providências de impulso. Para as fórmulas fora do fluxo de perícia (AJG geral, honorários, custas etc.), consulte `minutar-dispositivo/references/circunstancias.md`; regras de heading/numeração/caixa do verbo → `minutar-dispositivo/references/estrutura.md`.
 11. Ao redigir fatos relevantes ao saneamento, diferencie rigorosamente alegações das partes e prova. Petições, contestações, réplicas, manifestações e razões recursais não devem ser tratadas como prova de fatos controvertidos, salvo para avaliar confissão, anuência, reconhecimento do pedido, fato incontroverso, renúncia, desistência, delimitação da lide, pedidos de prova ou outra declaração processual atribuível à própria parte.
 12. Antes de entregar a resposta ao usuário, faça uma reflexão silenciosa, certificando-se de que a redação obedeceu as regras de estilo, o template e o plano. Verifique especificamente se não foram usadas frases-tópico soltas ou metadiscursivas, como "Esse ponto é decisivo" ou fórmulas equivalentes, e se as petições das partes não foram usadas como elementos probatórios indevidos. Caso não tenha obedecido, faça os ajustes necessários.
 

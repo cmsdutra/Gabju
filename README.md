@@ -8,7 +8,7 @@ Cada skill é um "roteiro de trabalho" escrito em Markdown que diz ao modelo **o
 
 - **Versão atual:** `0.6.0` (ver [`plugin.json`](plugin.json))
 - **Formato:** [Agent Plugins 1.0](https://agent-plugins.org/schemas/1.0.0/plugin.schema.json), com extensão `com.openai` (interface para o ChatGPT)
-- **Skills:** 18
+- **Skills:** 20
 - **Idioma:** português do Brasil
 
 ---
@@ -89,7 +89,11 @@ Prepare uma minuta de despacho intimando a autora para réplica, em 15 dias.
 Analise os documentos processuais anexados e indique a skill adequada.
 ```
 
-A terceira forma é útil quando você ainda não sabe qual skill usar: o modelo examina os anexos e sugere o caminho.
+A terceira forma é útil quando você ainda não sabe qual skill usar: o modelo examina os anexos e sugere o caminho. Para uma visão geral do plugin dentro da própria conversa, peça ajuda:
+
+```text
+Use $ajuda: o que o gabju faz e por onde começo?
+```
 
 ### 3.3. Dica de ouro
 
@@ -113,15 +117,17 @@ As skills são agrupadas por prefixo:
 - `analisar-*` — produzem **insumo analítico** (não minuta).
 - `minutar-*` — produzem **texto de minuta**.
 - `esp-*` — **especialistas** temáticos (contadoria, previdenciário, saúde).
-- demais — **apoio**: leitura, segurança, revisão e validação.
+- demais — **apoio**: ajuda, leitura, segurança, revisão e validação.
 
 | Skill | Nome de exibição | Para que serve | Invocação implícita |
 |---|---|---|:---:|
+| `ajuda` | Ajuda | Explica o plugin, indica a skill adequada e faz triagem dos anexos | ✅ |
 | `indexar-pdf` | Indexar PDF | Recupera a leitura de PDFs problemáticos (OCR, segmentação por Id.) | ✅ |
 | `auditar-prompt-injection` | Auditar Prompt Injection | Triagem de instruções hostis escondidas em documentos | ✅ |
-| `sumarizar-processo` | Sumarizar Processo | Classifica cada documento e extrai dados estruturados, sem inferências | ❌ |
-| `analisar-controversias` | Analisar Controvérsias | Mapeia pontos fáticos e jurídicos controvertidos nas peças | ❌ |
-| `analisar-provas` | Analisar Provas | Analisa o conjunto probatório frente às hipóteses fáticas | ❌ |
+| `sumarizar-processo` | Sumarizar Processo | Classifica cada documento e extrai dados estruturados, sem inferências | ✅ |
+| `analisar-controversias` | Analisar Controvérsias | Mapeia pontos fáticos e jurídicos controvertidos nas peças | ✅ |
+| `analisar-provas` | Analisar Provas | Analisa o conjunto probatório frente às hipóteses fáticas | ✅ |
+| `minutar-completa` | Minuta Completa | Minuta integral (relatório + fundamentação + dispositivo), coordenando as skills modulares | ✅ |
 | `minutar-relatorio-geral` | Minutar Relatório Geral | Relatório de sentença, saneamento, tutela ou interlocutória | ✅ |
 | `minutar-despacho` | Minutar Despacho | Despachos de impulso processual | ✅ |
 | `minutar-interlocutoria` | Minutar Interlocutória | Fundamentação de decisão interlocutória geral | ✅ |
@@ -136,7 +142,7 @@ As skills são agrupadas por prefixo:
 | `esp-previdenciario` | Especialista em Direito Previdenciário | CNIS, tempo de contribuição, concomitâncias, RMI | ✅ |
 | `esp-direito-sanitario` | Especialista em Direito Sanitário | SUS, medicamentos, ANVISA, CONITEC, NATJUS, Temas 793 e 1234/STF | ✅ |
 
-> **Por que algumas skills não têm invocação implícita?** `sumarizar-processo`, `analisar-controversias` e `analisar-provas` produzem relatórios analíticos extensos. Para evitar que sejam acionadas sem necessidade, elas só rodam quando você pede expressamente (ex.: `Use $analisar-provas ...`).
+> **Skills de análise só sob pedido expresso.** `sumarizar-processo`, `analisar-controversias` e `analisar-provas` produzem relatórios analíticos extensos. Suas descrições restringem o acionamento a pedidos que manifestem expressamente esse objetivo (ex.: "analise as provas", "mapeie as controvérsias", "resuma os documentos"); elas não são acionadas como etapa de minutas ou outras tarefas.
 
 ---
 
@@ -171,13 +177,36 @@ Não existe um fluxo obrigatório — cada skill é **autocontida** e pode ser u
               $revisar-texto  ►  $validar-citacoes
 ```
 
-Para atos simples (um despacho de mero impulso, por exemplo), basta a skill correspondente.
+Pedidos de minuta encadeiam automaticamente relatório, fundamentação e dispositivo com `$minutar-completa`, por padrão e sem exigir a expressão "minuta completa" (ver [6.3](#minutar-completa--minuta-completa)). Para atos simples (um despacho de mero impulso, por exemplo), basta a skill correspondente.
 
 ---
 
 ## 6. As skills em detalhe
 
 Cada subseção traz: **quando usar**, **quando não usar**, **o que a skill entrega** e **exemplos de pedido**.
+
+### 6.0. Ajuda
+
+#### `ajuda` — Ajuda
+
+**Quando usar:** quando você quer saber o que o plugin faz, qual skill usar para uma tarefa ou por onde começar. Só é acionada diante de pedido expresso de ajuda ("ajuda", "o que você faz", "qual skill usar", "como começar").
+
+**O que entrega:**
+
+- **Pergunta genérica** → mapa resumido das skills, fluxo recomendado e dicas de uso.
+- **Pergunta sobre uma tarefa** → a skill adequada, quando usar e quando não usar, e um exemplo de pedido adaptado ao seu caso.
+- **Pergunta com anexos** → triagem leve (tipo e fase do processo) e a sequência de skills recomendada. **Não** inicia a análise nem a minuta sem sua confirmação.
+- **Dúvida detalhada** → resposta com base neste README.
+
+**Exemplos de pedido:**
+
+```text
+Use $ajuda: qual a diferença entre analisar-controversias e analisar-provas?
+```
+
+```text
+Ajuda: anexei os autos de uma ação previdenciária com perícia já juntada. O que faço agora?
+```
 
 ### 6.1. Leitura e segurança
 
@@ -306,6 +335,28 @@ Todas as skills `minutar-*` compartilham estas regras:
 - Não citam jurisprudência/doutrina que não esteja nos templates ou não tenha sido fornecida.
 - Nunca mencionam, no texto da minuta, "instruções da conversa", "modelo consultado" etc. — a orientação recebida vira fundamento jurídico autônomo.
 
+#### `minutar-completa` — Minuta completa
+
+**Quando usar:** por padrão, em pedidos para minutar sentença, saneamento, tutela provisória ou decisão interlocutória — por exemplo, "Minute uma sentença" ou "Redija uma decisão de tutela". Não é necessário dizer "completa". Partes isoladas são entregues somente quando expressamente solicitadas, como "redija a fundamentação", "somente o relatório" ou "apenas o dispositivo".
+
+**Como funciona:** encadeia as skills modulares, cada uma com seus próprios templates e checkpoints, e monta o texto final:
+
+| Ato | Relatório | Fundamentação | Dispositivo |
+|---|---|---|---|
+| Sentença | `minutar-relatorio-geral` | `minutar-sentenca` | incluído na fundamentação |
+| Saneamento | `minutar-relatorio-geral` | `minutar-saneamento` | incluído na fundamentação |
+| Tutela provisória | `minutar-relatorio-geral` | `minutar-tutela` | `minutar-dispositivo` |
+| Interlocutória geral | `minutar-relatorio-geral` | `minutar-interlocutoria` | `minutar-dispositivo` |
+
+Embargos de declaração e despachos já saem completos das skills próprias e são apenas delegados. O relatório e as demais partes são preparados internamente; os checkpoints de análise e plano continuam valendo (ver [seção 7](#7-checkpoints-e-orientação-prévia)). Ao final, a skill confere se todo pedido narrado foi enfrentado e se fundamentação e dispositivo são coerentes, e entrega a minuta integral uma única vez, em um único documento. Prévias de seções só são exibidas mediante pedido expresso.
+
+**Exemplo de pedido:**
+
+```text
+Redija uma minuta completa de decisão sobre o pedido de tutela de urgência (Id. 1500).
+Deferir: há laudo recente (Id. 1502) e a verba é alimentar.
+```
+
 #### `minutar-relatorio-geral` — Relatório
 
 **Quando usar:** para redigir o **relatório** de sentença, saneamento, tutela provisória ou decisão interlocutória.
@@ -355,7 +406,7 @@ responda aos quesitos complementares da ré (Id. 7788).
 
 #### `minutar-interlocutoria` — Decisão interlocutória geral
 
-**Quando usar:** fundamentação de decisões interlocutórias **gerais** (ex.: gratuidade, competência, intervenção de terceiros, produção de prova específica).
+**Quando usar:** decisões interlocutórias completas por padrão, ou somente fundamentação quando expressamente solicitada, em questões **gerais** (ex.: gratuidade, competência, intervenção de terceiros, produção de prova específica).
 
 **Quando não usar:** embargos, saneamento e tutela provisória — cada um tem skill própria. Só é usada com invocação expressa ou pedido expresso de decisão interlocutória.
 
@@ -403,7 +454,7 @@ nova perícia (Id. 2005). Perigo de dano: verba alimentar.
 
 #### `minutar-sentenca` — Sentença
 
-**Quando usar:** fundamentação de sentenças.
+**Quando usar:** para minutar sentenças completas por padrão, pela coordenação de `$minutar-completa`, ou para redigir somente a fundamentação quando expressamente solicitada.
 
 **Etapas:**
 
@@ -429,12 +480,12 @@ ruído acima do limite de 1995 a 2003; reconhecer o período como especial.
 
 **Quando usar:** sempre que houver pedido **expresso** de decisão em embargos de declaração. Substitui as skills de relatório e fundamentação nesse caso.
 
-**Etapas (com checkpoint ao final de cada uma, por padrão):**
+**Etapas (com checkpoints nas etapas 2 e 3, por padrão):**
 
-1. **Relatório** — decisão embargada, fundamentos dos embargos e contrarrazões, em texto corrido.
+1. **Relatório** — decisão embargada, fundamentos dos embargos e contrarrazões, em texto corrido, preparado internamente sem entrega separada.
 2. **Admissibilidade e mérito** — exame de cada vício alegado (omissão, contradição, obscuridade, erro material).
 3. **Plano de argumentação.**
-4. **Redação da fundamentação.**
+4. **Redação e montagem final** — relatório, fundamentação, dispositivo, providências aplicáveis e fechamento reunidos em um único documento.
 
 Se você já disser como tratar **cada** vício, a etapa 2 é dispensada e a 3 segue direto para a 4.
 
@@ -577,9 +628,9 @@ Use $esp-contadoria-judicial para verificar se a tabela de amortização do cont
 
 #### `esp-previdenciario` — Previdenciário
 
-**Quando usar:** análise de CNIS e conferência de tempo de contribuição, concomitâncias, salários de contribuição e RMI.
+**Quando usar:** análise de CNIS e conferência de tempo de contribuição, concomitâncias, salários de contribuição e RMI; exame jurídico de tempo especial, PPP/LTCAT, conversão e requisitos de aposentadoria especial, inclusive os efeitos da ADI 6309.
 
-**Fluxo obrigatório:**
+**Fluxo de cálculo sobre CNIS:**
 
 1. Confere legibilidade e completude dos anexos.
 2. Executa `extrair_cnis.py` → JSON canônico.
@@ -592,7 +643,9 @@ Use $esp-contadoria-judicial para verificar se a tabela de amortização do cont
 
 **Limites:**
 
-- Atividade especial só é considerada se documentada (PPP/LTCAT) ou expressamente informada; o CNIS isolado não a comprova.
+- O exame jurídico do tempo especial segue `references/tempo-especial.md`, pode ocorrer sem CNIS e precede a anotação de fatores de conversão. O CNIS isolado não comprova a exposição; premissa informada para simulação não substitui prova.
+- A ADI 6309 é tratada conforme o dispositivo atualizado, distinguindo idade mínima, conversão e cálculo do benefício. A skill identifica a troca de numeração com a ADI 6039.
+- O motor permanece aritmético e não automatiza a concessão nem a RMI da aposentadoria especial.
 - Todas as regras de transição calculáveis são expostas; a skill **não elege automaticamente** a mais vantajosa.
 
 **Exemplo de pedido:**
@@ -671,15 +724,12 @@ O arquivo [`references/personalizacao.md`](references/personalizacao.md) define 
 |---|---|
 | Localidade e UF | `[LOCALIDADE/UF]` |
 | Unidade judiciária | `[UNIDADE JUDICIÁRIA]` |
-| Nome do magistrado ou da magistrada | `[NOME DO(A) MAGISTRADO(A)]` |
-| Cargo | `[CARGO DO(A) MAGISTRADO(A)]` |
 
 **Exemplo de instrução personalizada** (no seu ambiente de IA, não no repositório):
 
 ```text
 Unidade judiciária: 1ª Vara Federal de Exemplópolis
 Localidade/UF: Exemplópolis/XX
-Magistrado(a): FULANO DE TAL — Juiz Federal
 ```
 
 **Exemplo de fechamento gerado:**
@@ -693,6 +743,8 @@ Sem esses dados:
 ```text
 [LOCALIDADE/UF], data de assinatura do sistema.
 ```
+
+**Sem assinatura.** A minuta termina na linha de local e data. Não há bloco de assinatura, nome ou cargo do(a) magistrado(a), "(assinado digitalmente)" nem HTML — mesmo que a sua personalização informe esses dados —, porque a assinatura é aposta pelo sistema processual. Na `revisar-texto`, um bloco de assinatura encontrado no texto é apontado para supressão.
 
 Ao entregar a minuta, a skill avisa, em nota breve, quais placeholders ficaram pendentes. A personalização trata **somente da unidade prolatora**: nomes e localidades das partes e dos fatos vêm sempre do processo.
 
@@ -710,7 +762,7 @@ Os scripts são chamados pelas próprias skills, mas também podem ser usados di
 |---|---|
 | `scripts/indexar_pdf.py` | **PyMuPDF** ou **pypdf**; para OCR: PyMuPDF, **Pillow**, **pytesseract** e o executável **Tesseract** com dados do idioma (`por`) |
 | `esp-previdenciario/scripts/extrair_cnis.py` | **PyMuPDF**, **Pillow**; para PDF escaneado, **pytesseract** + Tesseract |
-| `auditar-prompt-injection/scripts/triagem_prompt_injection.py` | Opcional: **PyYAML** (para regras adicionais em YAML) |
+| `scripts/triagem_prompt_injection.py` | Opcional: **PyYAML** (para regras adicionais em YAML) |
 | Rotinas de contadoria, `analisar_cnis.py`, `extract_fundamentacao.py` | Apenas biblioteca padrão |
 | `scripts/validate_plugin.py` (desenvolvimento) | **PyYAML** (`requirements-dev.txt`) |
 
@@ -743,10 +795,10 @@ Depois, leia `manifest.json` e `cobertura.json` para saber o que ficou pendente.
 
 ```bash
 # Sobre um arquivo, uma pasta de textos ou a pasta gerada pelo indexador
-python3 skills/auditar-prompt-injection/scripts/triagem_prompt_injection.py "autos/processo-indexado"
+python3 scripts/triagem_prompt_injection.py "autos/processo-indexado"
 
 # Salvando JSON e relatório Markdown, e falhando (código ≠ 0) se houver achado médio ou alto
-python3 skills/auditar-prompt-injection/scripts/triagem_prompt_injection.py "autos/processo-indexado" \
+python3 scripts/triagem_prompt_injection.py "autos/processo-indexado" \
   --out triagem.json --markdown triagem.md --fail-on medio
 ```
 
@@ -877,6 +929,7 @@ gabju/
 │   └── personalizacao.md       # regras de dados institucionais e placeholders (compartilhado)
 ├── scripts/
 │   ├── indexar_pdf.py          # indexador de PDF compartilhado (vai no pacote)
+│   ├── triagem_prompt_injection.py  # triagem de prompt injection compartilhada (vai no pacote)
 │   ├── validate_plugin.py      # validação determinística (desenvolvimento)
 │   ├── package_plugin.py       # gera dist/gabju.zip (desenvolvimento)
 │   └── plugin_payload.py       # define o que entra no pacote (desenvolvimento)
@@ -950,7 +1003,7 @@ python3 scripts/validate_plugin.py
 Saída esperada:
 
 ```text
-Plugin válido: gabju 0.6.0 (18 skills)
+Plugin válido: gabju 0.6.0 (20 skills)
 ```
 
 O validador verifica, entre outros pontos:
@@ -962,6 +1015,7 @@ O validador verifica, entre outros pontos:
 | Recursos | Todo link Markdown e todo caminho citado entre crases (`references/...`, `assets/...`, `scripts/...`) precisa existir **e** estar no pacote |
 | Chamadas entre skills | Todo `$nome-de-skill` citado num `SKILL.md` precisa ser uma skill empacotada |
 | `agents/openai.yaml` | Obrigatório; `display_name`, `short_description` e `default_prompt` preenchidos; `default_prompt` menciona `$<nome>`; `allow_implicit_invocation` booleano |
+| Mapa de ajuda | A skill `ajuda` é obrigatória e precisa citar, como `$nome`, **todas** as skills do pacote — skill nova sem entrada na ajuda reprova a validação |
 | Paridade de invocação | `allow_implicit_invocation: false` exige `disable-model-invocation: true` no frontmatter do `SKILL.md` (e vice-versa) |
 | Higiene do pacote | Sem BOM UTF-8; UTF-8 válido; sem `__pycache__`, `.pyc`, `.tmp` etc.; sem arquivos com nome de segredo (`.env`, `.pem`, `id_rsa`…); sem chaves privadas ou de API no conteúdo; sem caminhos absolutos de máquina local ou referências a pastas pessoais |
 
@@ -1044,7 +1098,9 @@ Atualize `version` em `plugin.json` seguindo SemVer (`MAJOR.MINOR.PATCH`):
 
 4. **Adicione templates e regras** em `assets/` e `references/`, citando-os no `SKILL.md` por link Markdown ou entre crases — o validador confere se existem.
 
-5. **Valide, teste e empacote** (seção 11).
+5. **Inclua a skill no mapa da ajuda** (`skills/ajuda/SKILL.md`), na seção temática adequada, com o `$nome` e um exemplo de pedido. Sem isso, a validação falha.
+
+6. **Valide, teste e empacote** (seção 11).
 
 ### Boas práticas de redação de skills
 
@@ -1069,14 +1125,20 @@ Atualize `version` em `plugin.json` seguindo SemVer (`MAJOR.MINOR.PATCH`):
 
 ## 14. Perguntas frequentes
 
+**Não sei qual skill usar. E agora?**
+Peça ajuda na conversa (`Use $ajuda ...` ou simplesmente "ajuda"). Se já tiver anexado os documentos, a skill sugere a sequência adequada para o seu caso.
+
 **Preciso usar `$nome-da-skill` sempre?**
-Não. Na maioria das skills o modelo identifica a adequada pelo pedido. O `$` é útil para ter certeza de qual skill será usada e é obrigatório para `sumarizar-processo`, `analisar-controversias` e `analisar-provas`.
+Não. Na maioria das skills o modelo identifica a adequada pelo pedido. Chamar pelo nome é útil para ter certeza de qual skill será usada.
 
 **A skill parou e está me fazendo perguntas. Fiz algo errado?**
 Não — é um checkpoint. Responda com a escolha de encaminhamento ou dê orientação completa já no pedido para evitar a parada (seção 7).
 
 **Por que a minuta saiu com `[LOCALIDADE/UF]`?**
 Porque esse dado não estava disponível nas instruções de personalização do seu ambiente. Configure-as (seção 8) ou informe na própria tarefa.
+
+**Como peço a minuta inteira de uma vez?**
+Basta pedir a minuta do ato (por exemplo, "minute uma sentença"). A minuta completa é o padrão; partes isoladas dependem de delimitação expressa, como "redija somente a fundamentação". `$minutar-completa` encadeia relatório, fundamentação e dispositivo e entrega o texto montado. Se você já der o resultado e a razão central de cada questão, ela vai do início ao fim sem paradas.
 
 **Posso usar duas skills juntas?**
 Sim. Exemplos comuns: `$esp-direito-sanitario` + `$minutar-tutela`; `$esp-previdenciario` + `$minutar-sentenca`. As skills de minuta também chamam `$minutar-dispositivo` e `$esp-contadoria-judicial` internamente quando precisam.

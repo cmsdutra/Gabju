@@ -4,15 +4,19 @@
   "version": "0.6.0",
   "description": "Fluxos autocontidos para análise processual e elaboração de minutas judiciais em gabinetes.",
   "author": {
-    "name": "gabju"
+    "name": "Caio Dutra",
+    "email": "caio.dutra@trf1.jus.br",
+    "url": "https://github.com/cmsdutra/"
   },
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "gabju",
+        "logo": "./assets/icon-transparent.png",
+        "composerIcon": "./assets/icon-transparent.png",
         "shortDescription": "Análise e minutas judiciais",
         "longDescription": "Analisa peças e provas, estrutura controvérsias e elabora relatórios, despachos, decisões, sentenças e cálculos judiciais a partir dos arquivos anexados à conversa.",
-        "developerName": "gabju",
+        "developerName": "Caio Dutra",
         "category": "Productivity",
         "capabilities": [
           "Interactive"

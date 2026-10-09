@@ -23,7 +23,7 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 import indexar_pdf as ipdf  # type: ignore
 
 # Import da triagem para teste de integração
-TRIAGEM_DIR = ROOT / "skills" / "auditar-prompt-injection" / "scripts"
+TRIAGEM_DIR = ROOT / "scripts"
 sys.path.insert(0, str(TRIAGEM_DIR))
 import triagem_prompt_injection as tpi  # type: ignore
 

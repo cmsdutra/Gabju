@@ -5,6 +5,10 @@ description: Elabora minuta de decisão em embargos de declaração (relatório,
 
 # Skill: Embargos de Declaração
 
+## Escopo da entrega
+
+Por padrão, entregue a minuta completa, com as seções adequadas ao ato. Redija partes isoladas somente quando o usuário as solicitar expressamente; nesse caso, limite a entrega às seções pedidas, mesmo que o template contenha outras. Preserve os checkpoints e as deliberações necessárias à parte solicitada; não produza seções excluídas do pedido como entregas intermediárias.
+
 ## Personalização
 
 Leia [personalização do gabinete](../../references/personalizacao.md) ao aplicar convenções ou preencher dados institucionais e fechamento: use a personalização do ChatGPT disponível no contexto; dados ausentes recebem placeholders padrão.
@@ -13,7 +17,7 @@ Leia [personalização do gabinete](../../references/personalizacao.md) ao aplic
 
 Quando precisar consultar anexos, tente primeiro a leitura direta. Se houver dificuldade concreta que impeça acessar o conteúdo necessário, acione $indexar-pdf somente para os PDFs afetados, informando a dificuldade observada. Tamanho e quantidade de páginas isolados não justificam indexação. Reutilize os textos recuperados e os diagnósticos ao retomar esta skill, preservando seu escopo e checkpoints.
 
-Esta skill conduz a elaboração completa da minuta de decisão em embargos de declaração em **até quatro etapas sequenciais**: (1) relatório, (2) análise de admissibilidade e mérito, (3) plano de argumentação e (4) redação da fundamentação. Por padrão, cada etapa tem checkpoint do usuário ao final, e não se avança para a etapa seguinte sem confirmação expressa. Quando houver orientação prévia suficiente na conversa ou em anexo, a Etapa 2 é dispensada e o checkpoint da Etapa 3 não se aplica, seguindo direto para a Etapa 4.
+Esta skill conduz a elaboração completa da minuta de decisão em embargos de declaração em **até quatro etapas sequenciais**: (1) relatório, (2) análise de admissibilidade e mérito, (3) plano de argumentação e (4) redação e montagem final. Por padrão, há checkpoints ao final das Etapas 2 e 3, e não se avança sem confirmação expressa. O relatório é preparado internamente, sem checkpoint próprio. Quando houver orientação prévia suficiente na conversa ou em anexo, a Etapa 2 é dispensada e o checkpoint da Etapa 3 não se aplica, seguindo direto para a Etapa 4.
 
 **Papel**: atue como juiz federal experiente, técnico e prudente, especialista em direito processual civil.
 
@@ -28,7 +32,7 @@ Esta skill conduz a elaboração completa da minuta de decisão em embargos de d
 Antes da Etapa 2, verifique se a conversa ou algum anexo contém orientação expressa do usuário sobre a admissibilidade e o mérito dos vícios alegados nos embargos (por exemplo, se cada vício deve ser acolhido ou rejeitado, e por quê).
 
 - **Orientação suficiente para todos os vícios alegados**: trate-a como a deliberação do usuário sobre a Etapa 2. Pule a Etapa 2 — não a apresente nem peça validação dela — e vá da Etapa 1 direto à Etapa 3, incorporando a orientação ao plano de argumentação. Ao final da Etapa 3, não aguarde confirmação do usuário: avance automaticamente para a Etapa 4.
-- **Orientação ausente, ou insuficiente para algum vício alegado**: siga o fluxo integral de quatro etapas com checkpoint ao final de cada uma. Se a orientação cobrir apenas parte dos vícios, execute a Etapa 2 normalmente para os vícios não cobertos e trate os demais como já deliberados.
+- **Orientação ausente, ou insuficiente para algum vício alegado**: siga o fluxo integral de quatro etapas com checkpoints ao final das Etapas 2 e 3. Se a orientação cobrir apenas parte dos vícios, execute a Etapa 2 normalmente para os vícios não cobertos e trate os demais como já deliberados.
 
 ## Etapa 1 — Relatório
 
@@ -39,8 +43,8 @@ Antes da Etapa 2, verifique se a conversa ou algum anexo contém orientação ex
 1. Leia `assets/template-relatorio.md` antes de redigir.
 2. Redija em texto corrido, sem headers, seções ou marcações estruturais visíveis.
 3. Aplique as regras de estilo abaixo.
-4. Entregue o relatório em **artefato**.
-5. Ao final, pergunte ao usuário se deseja ajustes. Avance para a Etapa 2 apenas com confirmação expressa.
+4. Reserve o relatório internamente para a montagem final, sem criar artefato separado. Se o pedido for expressamente de relatório isolado, revise e entregue somente essa seção, encerrando a tarefa.
+5. No pedido de minuta completa, prossiga sem exibir o relatório nem solicitar confirmação: vá à Etapa 2 ou, com orientação prévia suficiente, à Etapa 3. Em pedidos de outras partes isoladas, use a leitura das peças como insumo, sem redigir um relatório fora do escopo.
 
 **Regras de estilo do relatório**:
 
@@ -122,7 +126,7 @@ Antes da Etapa 2, verifique se a conversa ou algum anexo contém orientação ex
 
 ## Etapa 4 — Redação
 
-**Objetivo**: redigir a fundamentação completa da decisão, com base no plano aprovado.
+**Objetivo**: redigir a fundamentação e o dispositivo com base no plano aprovado e montar a minuta completa em um único documento, respeitando eventual pedido expresso de partes isoladas.
 
 **Instruções**:
 
@@ -131,7 +135,7 @@ Antes da Etapa 2, verifique se a conversa ou algum anexo contém orientação ex
 3. Para rejeitar alegações de omissão ou contradição: sempre que possível, cite direta e literalmente os trechos da decisão embargada que refutam o vício, em citação destacada.
 4. Para as citações diretas, reproduza o texto com fidelidade absoluta, mantendo eventuais erros de escrita ou vícios de linguagem do original.
 5. Aplique as regras de estilo abaixo.
-6. Entregue em **artefato**.
+6. Reserve a redação para a montagem final. Na minuta completa, reúna relatório, fundamentação, dispositivo, providências de impulso aplicáveis e fechamento de local/data em um único documento, sem duplicar blocos. Em pedidos parciais, inclua somente as seções solicitadas.
 7. Ao redigir fatos relevantes ao julgamento dos embargos, diferencie rigorosamente alegações das partes e prova. Embargos, contrarrazões, manifestações e demais petições não devem ser tratados como prova de fatos controvertidos, salvo para avaliar confissão, anuência, reconhecimento do pedido, fato incontroverso, renúncia, desistência, delimitação do vício alegado ou outra declaração processual atribuível à própria parte.
 8. Se a minuta trouxer providências de impulso além do dispositivo dos embargos, evite repetir deliberação já feita em decisão anterior; se a providência anterior ainda não tiver sido cumprida, referencie-a apenas na seção de providências de impulso processual. Se o resultado dos embargos envolver circunstância acessória fora do padrão do Bloco 5/6 (ex.: multa por embargos protelatórios, honorários, custas), consulte `minutar-dispositivo/references/circunstancias.md`.
 9. Identifique os embargos por Id. no relatório e no dispositivo. Na fundamentação, em regra, não repita o Id. dos embargos em cada vício; após a primeira identificação, use "a embargante", "o embargante", "a parte" ou o nome da parte, conforme o caso.
@@ -171,6 +175,8 @@ Antes da Etapa 2, verifique se a conversa ou algum anexo contém orientação ex
 ---
 
 ## Natureza do ato e entrega
+
+Entregue a minuta completa uma única vez, em um único artefato quando esse recurso estiver disponível, ou como texto integral em Markdown no chat. Não entregue relatório e fundamentação em artefatos separados. Mantenha os checkpoints e registros de deliberação no chat, fora do documento final. Se chamada por $minutar-completa, devolva o documento consolidado à coordenadora para uma única entrega, sem repetir a minuta. Uma prévia de seção só deve ser exibida por solicitação expressa do usuário.
 
 O ato judicial que julga embargos de declaração tem a mesma natureza do ato embargado. Ao entregar a minuta, identifique corretamente essa natureza: se o ato embargado for sentença, o resultado é uma minuta de sentença; se for decisão interlocutória, saneamento ou tutela, adeque de igual modo. Se gerar arquivo Markdown para download, use título e `act-type` de frontmatter coerentes com o ato embargado.
 

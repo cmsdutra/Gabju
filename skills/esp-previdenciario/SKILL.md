@@ -1,6 +1,6 @@
 ---
 name: esp-previdenciario
-description: Analisa CNIS e confere cálculos previdenciários de tempo, concomitâncias, salários e RMI. Use em demandas previdenciárias que exijam apuração técnica ou relatório sob demanda.
+description: Analisa CNIS, tempo especial, PPP/LTCAT e requisitos de aposentadoria especial, inclusive os efeitos da ADI 6309; confere tempo, concomitâncias, salários e RMI. Use em demandas previdenciárias que exijam análise jurídica da especialidade ou apuração técnica.
 ---
 
 # Especialista Previdenciário
@@ -11,7 +11,14 @@ Quando precisar consultar anexos, tente primeiro a leitura direta. Se houver dif
 
 A recuperação da leitura não substitui a extração canônica de CNIS exigida abaixo para o cálculo.
 
-## Fluxo obrigatório
+## Seleção do fluxo
+
+- Para CNIS, totais de contribuição, RMI e transições calculáveis, siga o fluxo de cálculo abaixo.
+- Para reconhecimento de tempo especial, exame de PPP/LTCAT, conversão ou aposentadoria especial, leia [references/tempo-especial.md](references/tempo-especial.md) e siga o fluxo jurídico dessa referência. Esse exame pode ser feito sem CNIS; a extração canônica é obrigatória quando houver cálculo baseado nele.
+- Quando o pedido reunir os dois objetos, examine primeiro o enquadramento jurídico dos períodos e a admissibilidade da conversão; depois forneça ao calculador apenas os fatores justificados. Períodos controvertidos podem compor cenários separados, identificados como hipóteses.
+- Se o usuário mencionar ADI 6039 em matéria de aposentadoria especial, confira a identificação e explique a distinção em relação à ADI 6309. Não atribua efeitos previdenciários à ADI 6039 nem substitua silenciosamente o precedente indicado.
+
+## Fluxo obrigatório de cálculo
 
 1. Confira legibilidade, completude e tipo dos anexos.
 2. Execute `scripts/extrair_cnis.py` para converter PDF, TXT ou JSON em JSON canônico.
@@ -25,13 +32,15 @@ A recuperação da leitura não substitui a extração canônica de CNIS exigida
 ## Limites
 
 - Produza saída estruturada em JSON ou relatório Markdown. A skill não oferece formatos tabulares, PDF ou Word.
-- Trate atividade especial como dado informado e documentado por PPP/LTCAT ou orientação expressa; o CNIS isolado não a comprova.
+- O CNIS isolado não comprova atividade especial. Examine os documentos e o regime probatório vigente no período; orientação expressa pode fixar uma premissa de cálculo, mas não substitui prova nem autoriza apresentar hipótese como reconhecimento jurídico.
+- O motor calcula fatores informados, mas não decide a especialidade, não valida o limite temporal da conversão e não automatiza os requisitos ou a RMI da aposentadoria especial. A análise jurídica cabe ao fluxo próprio; não use o resultado de aposentadoria comum como resposta automática sobre aposentadoria especial.
 - Exponha todas as regras de transição calculáveis, sem eleger automaticamente a mais vantajosa.
 - Preserve como pendência qualquer DER, sexo, expectativa de sobrevida, remuneração ou índice ausente/ilegível.
 - Destaque indicadores, divergências e fatores desatualizados que dependam de conferência humana.
 
 ## Recursos
 
+- `references/tempo-especial.md`: leia para reconhecimento de especialidade, PPP/LTCAT, EPI, conversão, aposentadoria especial ou aplicação da ADI 6309.
 - `scripts/extrair_cnis.py`: extração determinística e normalização; use sempre antes do cálculo, salvo JSON canônico já conferido.
 - `scripts/analisar_cnis.py`: cálculo e serialização determinísticos; use sempre para totais, RMI e transições.
 - `references/regras-calculo.md`: leia ao explicar metodologia, resolver divergência ou avaliar regra de transição.

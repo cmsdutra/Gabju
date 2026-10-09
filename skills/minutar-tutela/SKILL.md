@@ -1,6 +1,6 @@
 ---
 name: minutar-tutela
-description: Redige fundamentação de tutela provisória (urgência, evidência, liminares em procedimentos especiais e questões processuais ligadas ao pedido urgente). Use para analisar/julgar/decidir/redigir minuta de tutela provisória, liminar, antecipação, tutela cautelar, de urgência ou evidência.
+description: Analisa e minuta decisões de tutela provisória, completas por padrão; partes isoladas somente quando expressamente solicitadas. Abrange tutela provisória (urgência, evidência, liminares em procedimentos especiais e questões processuais ligadas ao pedido urgente). Use para analisar/julgar/decidir/redigir minuta de tutela provisória, liminar, antecipação, tutela cautelar, de urgência ou evidência.
 ---
 
 # /minutar-tutela
@@ -12,6 +12,15 @@ Leia [personalização do gabinete](../../references/personalizacao.md) ao aplic
 ## Leitura dos anexos
 
 Quando precisar consultar anexos, tente primeiro a leitura direta. Se houver dificuldade concreta que impeça acessar o conteúdo necessário, acione $indexar-pdf somente para os PDFs afetados, informando a dificuldade observada. Tamanho e quantidade de páginas isolados não justificam indexação. Reutilize os textos recuperados e os diagnósticos ao retomar esta skill, preservando seu escopo e checkpoints.
+
+## Escopo da entrega
+
+Pedidos para minutar, redigir, elaborar ou preparar este ato produzem, por padrão, a minuta completa, mesmo sem as palavras "completa", "integral" ou "inteira". A invocação desta skill pelo nome também segue esse padrão. Conduza esses pedidos pelo $minutar-completa.
+
+Entregue partes isoladas apenas quando o usuário delimitar expressamente o escopo, por exemplo, "redija a fundamentação", "somente o relatório", "apenas o dispositivo" ou "relatório e fundamentação, sem dispositivo". Pedidos exclusivos de análise ou julgamento não iniciam a redação de uma minuta sem solicitação. Preserve os checkpoints de deliberação e de plano de argumentação.
+
+Quando chamada por $minutar-completa, execute apenas a etapa atribuída, devolva o texto à skill coordenadora e não a acione novamente. Na execução parcial, redija somente as seções solicitadas, ainda que o template contenha outras seções.
+
 
 Esta skill conduz a elaboração da fundamentação de decisões sobre tutela provisória, de acordo com templates e regras de estilo especificadas.
 
@@ -198,7 +207,7 @@ Orientações:
 1. Antes de iniciar a redação, leia `references/regras-de-estilo.md` e `assets/estrutura-comum.md`. Pela classificação da Etapa 1, leia apenas o arquivo de cada modalidade efetivamente presente na decisão. Consulte `assets/exemplos.md` somente se um exemplo de tutela de urgência ajudar na redação.
 2. Siga a estrutura comum e o template da modalidade selecionada, observando as regras de estilo e o plano de argumentação aprovado na Etapa 2, utilizando-o como guia para cada parágrafo, sem citá-lo como fonte.
 3. Em tutela de urgência, se ausente o perigo de dano ou risco ao resultado útil do processo, conclua que fica prejudicado o exame da probabilidade do direito, salvo orientação diversa do usuário.
-4. Se a tutela for concedida, inclua apenas a fundamentação e a delimitação argumentativa da medida. Não redija comandos de dispositivo, salvo pedido expresso do usuário. Quando o usuário pedir dispositivo, acione `minutar-dispositivo` (`minutar-dispositivo/references/estrutura.md` + `minutar-dispositivo/references/catalogo-especies.md` § Decisão de Tutela Provisória + `minutar-dispositivo/references/circunstancias.md` para AJG, remessa necessária, execução invertida etc.) em vez de redigir a seção livremente.
+4. Na etapa interna de fundamentação ou no pedido expresso dessa seção, inclua somente a fundamentação e a delimitação argumentativa da medida. Na minuta completa, inclua o dispositivo tanto na concessão quanto no indeferimento, pela coordenação de $minutar-completa. Para redigir o dispositivo solicitado ou integrar a minuta completa, acione `minutar-dispositivo` (`minutar-dispositivo/references/estrutura.md` + `minutar-dispositivo/references/catalogo-especies.md` § Decisão de Tutela Provisória + `minutar-dispositivo/references/circunstancias.md` para AJG, remessa necessária, execução invertida etc.) em vez de redigir a seção livremente.
 5. Ao redigir fatos relevantes ao pedido de tutela, diferencie rigorosamente alegações das partes e prova. Petições, contestações, réplicas, manifestações e razões recursais não devem ser tratadas como prova de fatos controvertidos, salvo para avaliar confissão, anuência, reconhecimento do pedido, fato incontroverso, renúncia, desistência, delimitação da lide ou outra declaração processual atribuível à própria parte.
 6. Antes de entregar a resposta ao usuário, faça uma reflexão silenciosa, certificando-se de que a redação obedeceu as regras de estilo, o template e o plano de argumentação. Verifique especificamente se não foram usadas frases-tópico soltas ou metadiscursivas, como "Esse ponto é decisivo" ou fórmulas equivalentes, e se as petições das partes não foram usadas como elementos probatórios indevidos. Caso não tenha obedecido, faça os ajustes necessários.
 

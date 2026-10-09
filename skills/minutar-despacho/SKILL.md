@@ -5,6 +5,10 @@ description: Redige minutas de despacho judicial com providências de impulso pr
 
 # /despacho
 
+## Escopo da entrega
+
+Por padrão, entregue a minuta completa, com as seções adequadas ao ato. Redija partes isoladas somente quando o usuário as solicitar expressamente; nesse caso, limite a entrega às seções pedidas, mesmo que o template contenha outras. Preserve os checkpoints e as deliberações necessárias à parte solicitada; não produza seções excluídas do pedido como entregas intermediárias.
+
 ## Personalização
 
 Leia [personalização do gabinete](../../references/personalizacao.md) ao aplicar convenções ou preencher dados institucionais e fechamento: use a personalização do ChatGPT disponível no contexto; dados ausentes recebem placeholders padrão.
@@ -46,7 +50,7 @@ Redigir minuta de despacho judicial a partir das peças processuais anexadas e d
    - Incluir `## **FUNDAMENTOS**` somente quando a providência exigir justificativa, análise preliminar, exposição de motivo, ou quando o usuário pedir expressamente.
    - Incluir `## **PROVIDÊNCIAS DE IMPULSO PROCESSUAL**` com comandos claros à Secretaria da Vara. Consulte `minutar-dispositivo/references/catalogo-especies.md` § Despacho de mero expediente/instrução para os padrões recorrentes (arquivamento, emenda de inicial, remessa à Contadoria/NUCOD) e `minutar-dispositivo/references/estrutura.md` para a regra de numeração/caixa do verbo.
    - Formular providências em lista com numerais romanos minúsculos entre parênteses, com o verbo operacional em negrito e caixa baixa no início de cada item. Evite repetir deliberação já feita em decisão anterior; se a providência anterior ainda não tiver sido cumprida, referencie-a apenas nesta seção.
-   - Encerrar com `[LOCALIDADE/UF], data do sistema.` salvo orientação diversa do usuário ou template específico.
+   - Encerrar com `[LOCALIDADE/UF], data de assinatura do sistema.` salvo orientação diversa do usuário ou template específico.
 
 7. Entregar a minuta.
    - Entregar o texto completo em Markdown no chat, pronto para copiar.

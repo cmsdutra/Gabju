@@ -45,20 +45,9 @@ Nome próprio = subsidiário: use para identificar o destinatário do comando qu
 
 ## Fórmula de encerramento (local/data)
 
-Última linha do corpo, fora de qualquer item, texto corrido sem negrito/lista: `[LOCALIDADE/UF], data de assinatura do sistema.` Nunca hardcode data real — a data é sempre gerada pelo sistema de assinatura.
+Última linha da minuta, fora de qualquer item, texto corrido sem negrito/lista: `[LOCALIDADE/UF], data de assinatura do sistema.` Nunca hardcode data real — a data é sempre gerada pelo sistema de assinatura.
 
-## Bloco de assinatura (quando aplicável no fluxo da tarefa)
-
-```
-<div align="center">
-<p display="none"> . </p>
-<p style="margin: 0;">(assinado digitalmente)</p>
-<p style="margin: 0;"><b>[NOME DO(A) MAGISTRADO(A)]</b></p>
-<p style="margin: 0;">[CARGO DO(A) MAGISTRADO(A)] — [UNIDADE JUDICIÁRIA]</p>
-</div>
-```
-
-Em JEF, a linha de cargo muda para "[CARGO DO(A) MAGISTRADO(A)] — [UNIDADE JUDICIÁRIA]". Só inclua bloco de assinatura se a orientação da tarefa/usuário pedir minuta já com esse fechamento.
+Nada vem depois dessa linha: sem assinatura, nome ou cargo do(a) magistrado(a), "(assinado digitalmente)" ou marcação HTML. A assinatura é aposta pelo sistema processual.
 
 ## Referência a Id. no dispositivo
 

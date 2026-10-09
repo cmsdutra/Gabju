@@ -1,7 +1,6 @@
 ---
 name: analisar-controversias
-description: Analisa argumentos das partes e destaca controvérsias a resolver na tarefa.
-disable-model-invocation: true
+description: Mapeia as controvérsias fáticas e jurídicas a partir das peças processuais (inicial, contestação, réplica, decisões). Use somente quando o usuário pedir expressamente a análise ou o mapeamento das controvérsias ou pontos controvertidos; não use como etapa de minuta, relatório ou outra tarefa.
 ---
 
 # /analisar-controversias

@@ -4,4 +4,4 @@ interface:
   default_prompt: "Use $sumarizar-processo para classificar os documentos anexados e extrair dados estruturados conforme o template correspondente."
 
 policy:
-  allow_implicit_invocation: false
+  allow_implicit_invocation: true

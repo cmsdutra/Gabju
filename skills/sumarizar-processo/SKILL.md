@@ -1,7 +1,6 @@
 ---
 name: sumarizar-processo
-description: Classifica cada documento anexado (petição, ato judicial, doc. auxiliar) e extrai dados estruturados, aplicando o template correspondente, fiel ao original — sem inferências. Devolve análise em markdown na resposta.
-disable-model-invocation: true
+description: Classifica cada documento anexado (petição, ato judicial, documento auxiliar) e extrai dados estruturados fiéis ao original, sem inferências. Use somente quando o usuário pedir expressamente resumo, sumário ou extração estruturada dos documentos do processo; não use como etapa de minuta, relatório ou outra tarefa.
 ---
 
 # /sumarizar-processo

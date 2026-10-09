@@ -1,0 +1,7 @@
+interface:
+  display_name: "Ajuda"
+  short_description: "O que o gabju faz e qual skill usar"
+  default_prompt: "Use $ajuda para saber o que o plugin faz e qual skill usar na minha tarefa."
+
+policy:
+  allow_implicit_invocation: true

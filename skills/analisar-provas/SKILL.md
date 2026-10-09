@@ -1,7 +1,6 @@
 ---
 name: analisar-provas
-description: Faz análise das provas.
-disable-model-invocation: true
+description: Analisa o conjunto probatório frente às hipóteses fáticas controvertidas, com standard probatório e apontamentos por prova. Use somente quando o usuário pedir expressamente a análise ou valoração das provas; não use como etapa de minuta, relatório ou outra tarefa.
 ---
 
 # /analisar-provas

@@ -1,6 +1,6 @@
 ---
 name: minutar-relatorio-geral
-description: Redige relatórios de minutas de decisões e sentenças no padrão da Justiça Federal, a partir das peças fornecidas. Use para redigir/elaborar/produzir relatório de minuta de decisão, despacho ou sentença. NÃO usar para embargos de declaração nem despacho (skills próprias).
+description: Redige relatórios de minutas de decisões e sentenças no padrão da Justiça Federal, a partir das peças fornecidas. Use mediante pedido expresso de relatório ou como etapa interna de minutar-completa para decisões e sentenças. NÃO usar para embargos de declaração nem despacho (skills próprias).
 ---
 
 # /minutar-relatorio-geral
@@ -29,7 +29,7 @@ Antes de redigir qualquer conteúdo, identifique para qual tipo de minuta será 
 
 Essa classificação segue um agrupamento por nível de detalhamento factual (ex: relatorio de sentença é mais detalhado que o de decisão interlocutória comum) e foco da abordagem (decisões de tutela provisória de urgência têm foco na descrição da urgência e da tutela provisória pretendida, em detrimento da tutela de mérito final).
 
-Preferencialmente, o tipo de minuta estará identificado em um arquivo de metadados da tarefa (campo `task` do frontmatter). Se não houver a informação em um arquivo de metadados da tarefa (método preferencial), faça a pergunta diretamente ao usuário.
+Identifique o tipo de minuta nas instruções expressas da conversa, no contexto informado pela skill chamadora (ex.: $minutar-completa) ou nos metadados da tarefa (campo `task` do frontmatter). A ausência de arquivo de metadados não exige pergunta: se o tipo já estiver claro na conversa ou na chamada, prossiga sem pedir confirmação. Pergunte somente se essas fontes não permitirem identificar o ato ou contiverem conflito não resolvido pelas orientações do usuário.
 
 > [!warning] **Não inicie a redação sem a identificação adequada do tipo de minuta.**
 
@@ -41,17 +41,17 @@ Confirme quais peças foram fornecidas (petição inicial, contestação, répli
 
 ### Passo 3 — Redigir o relatório
 
-Siga rigorosamente as regras de estilo descritas em `references/estilo.md` e o template selecionado em `assets/templates/`. O relatório é entregue como texto corrido, sem headers, títulos de seção, separadores ou qualquer outra marcação estrutural visível (salvo o título "# RELATÓRIO"). As divisões do template são fases narrativas internas, para orientar a redação, não seções do documento final.
+Siga rigorosamente as regras de estilo descritas em `references/estilo.md` e o template selecionado em `assets/templates/`. O relatório é entregue como texto corrido, sem headers, títulos de seção, separadores ou qualquer outra marcação estrutural visível (salvo o título `## **RELATÓRIO**`). As divisões do template são fases narrativas internas, para orientar a redação, não seções do documento final.
 
 ### Passo 4 - Revisar
 
-Após a entrega do relatório, faça uma revisão do texto, observando os seguintes parâmetros:
+Antes da entrega do relatório, faça uma revisão interna do texto, observando os seguintes parâmetros:
 - [ ] O texto obedece as regras estruturais do template?
 - [ ] O texto obedece as regras de estilo (`estilo.md`)?
 - [ ] O texto contém algum erro gramatical?
 - [ ] O texto obedece as limitações absolutas desta skill?
 
-Evite ser verboso na revisão; faça análise direta e concisa.
+Corrija o texto antes de entregá-lo. Quando chamada por $minutar-completa, devolva o relatório revisado internamente à coordenadora, sem exibi-lo ao usuário nem criar artefato separado. Em pedido expresso de relatório isolado, entregue somente o relatório revisado.
 
 ---
 

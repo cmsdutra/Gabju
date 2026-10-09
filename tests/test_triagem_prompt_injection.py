@@ -12,7 +12,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT_DIR = ROOT / "skills" / "auditar-prompt-injection" / "scripts"
+SCRIPT_DIR = ROOT / "scripts"
 SCRIPT = SCRIPT_DIR / "triagem_prompt_injection.py"
 
 # Importa o módulo diretamente para testes unitários

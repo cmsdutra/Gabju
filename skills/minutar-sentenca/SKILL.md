@@ -1,6 +1,6 @@
 ---
 name: minutar-sentenca
-description: Redige a fundamentação de sentenças judiciais. Use esta skill sempre que o usuário pedir para redigir, desenvolver ou elaborar a fundamentação de uma sentença judicial.
+description: Analisa e redige sentenças judiciais, com minuta completa por padrão mediante coordenação de minutar-completa. Use para minutar sentença ou redigir sua fundamentação; entregue partes isoladas somente quando expressamente solicitadas.
 ---
 
 # /minutar-sentenca
@@ -12,6 +12,15 @@ Leia [personalização do gabinete](../../references/personalizacao.md) ao aplic
 ## Leitura dos anexos
 
 Quando precisar consultar anexos, tente primeiro a leitura direta. Se houver dificuldade concreta que impeça acessar o conteúdo necessário, acione $indexar-pdf somente para os PDFs afetados, informando a dificuldade observada. Tamanho e quantidade de páginas isolados não justificam indexação. Reutilize os textos recuperados e os diagnósticos ao retomar esta skill, preservando seu escopo e checkpoints.
+
+## Escopo da entrega
+
+Pedidos para minutar, redigir, elaborar ou preparar este ato produzem, por padrão, a minuta completa, mesmo sem as palavras "completa", "integral" ou "inteira". A invocação desta skill pelo nome também segue esse padrão. Conduza esses pedidos pelo $minutar-completa.
+
+Entregue partes isoladas apenas quando o usuário delimitar expressamente o escopo, por exemplo, "redija a fundamentação", "somente o relatório", "apenas o dispositivo" ou "relatório e fundamentação, sem dispositivo". Pedidos exclusivos de análise ou julgamento não iniciam a redação de uma minuta sem solicitação. Preserve os checkpoints de deliberação e de plano de argumentação.
+
+Quando chamada por $minutar-completa, execute apenas a etapa atribuída, devolva o texto à skill coordenadora e não a acione novamente. Na execução parcial, redija somente as seções solicitadas, ainda que o template contenha outras seções.
+
 
 Esta skill conduz a elaboração da fundamentação de sentenças judiciais, de acordo com templates e regras de estilo especificadas.
 
@@ -151,7 +160,7 @@ Orientações:
 3. Ao redigir fatos relevantes ao mérito, diferencie rigorosamente alegações das partes e prova. Petições, contestações, réplicas, manifestações e razões recursais não devem ser tratadas como prova de fatos controvertidos, salvo para avaliar confissão, anuência, reconhecimento do pedido, fato incontroverso, renúncia, desistência, delimitação da lide ou outra declaração processual atribuível à própria parte.
 4. Na abertura do tópico de mérito, redija um parágrafo de apresentação do objeto da ação, sucinto e objetivo, com a seguinte estrutura: iniciar por "Conforme relatado"; indicar a pretensão principal da parte autora; sintetizar o argumento central que sustenta o pedido; em seguida, apresentar o contraponto defensivo da parte ré. Não antecipar a conclusão do julgamento nesse parágrafo.
 5. Na deliberação judicial, preliminar/prejudicial afastada fica só na fundamentação; suprima do dispositivo comandos do tipo "REJEITO a preliminar/prejudicial...". Só delibere expressamente no dispositivo a questão prefacial acolhida, quando decotar a cognição de mérito, extinguir parte do processo ou produzir providência dispositiva própria. Esta regra vale para sentença de mérito; para decisões interlocutórias cujo próprio objeto é julgar um conjunto de teses (ex. impugnação ao cumprimento de sentença), há exceção — ver `minutar-dispositivo/references/estrutura.md` § Preliminares e prejudiciais.
-6. Ao redigir a **DELIBERAÇÃO JUDICIAL** e as **PROVIDÊNCIAS DE IMPULSO PROCESSUAL** (fechamento do template, após a fundamentação), acione `minutar-dispositivo`: use `minutar-dispositivo/references/estrutura.md` para heading/numeração/caixa do verbo/encerramento, `minutar-dispositivo/references/catalogo-especies.md` § Sentença A/B/C para o padrão do resultado e `minutar-dispositivo/references/circunstancias.md` para honorários, custas, AJG, remessa necessária, correção/juros e demais circunstâncias aplicáveis ao caso.
+6. Respeite o escopo: se o usuário pediu somente fundamentação, omita os blocos de fechamento do template. Ao redigir a **DELIBERAÇÃO JUDICIAL** e as **PROVIDÊNCIAS DE IMPULSO PROCESSUAL** (fechamento do template, após a fundamentação), acione `minutar-dispositivo`: use `minutar-dispositivo/references/estrutura.md` para heading/numeração/caixa do verbo/encerramento, `minutar-dispositivo/references/catalogo-especies.md` § Sentença A/B/C para o padrão do resultado e `minutar-dispositivo/references/circunstancias.md` para honorários, custas, AJG, remessa necessária, correção/juros e demais circunstâncias aplicáveis ao caso.
 7. Calibre a extensão pela função de cada fundamento: diga só o necessário para resolver a controvérsia, sem repetir a mesma premissa em parágrafos diferentes, sem reforços retóricos e sem refutar argumentos laterais que não alterem o resultado.
 8. Antes de entregar a resposta ao usuário, faça uma reflexão silenciosa, certificando-se de que a redação obedeceu as regras de estilo e o plano de argumentação, bem como as regras negativas e as restrições da skill. Verifique especificamente se não foram usadas frases-tópico soltas ou metadiscursivas, como "Esse ponto é decisivo" ou fórmulas equivalentes, se as petições das partes não foram usadas como elementos probatórios indevidos, e se a DELIBERAÇÃO JUDICIAL não contém comando de rejeição de preliminar/prejudicial já superada na fundamentação (regra do item 5 acima). Caso não tenha obedecido, faça os ajustes necessários.
 

@@ -42,4 +42,4 @@ A Secretaria da Vara deverá:
 
 **(iii)** **oficiar** à CAIXA ECONÔMICA FEDERAL para apresentar informações sobre o saldo da conta judicial nº 3924.000.000-1 ou quaisquer outras vinculadas a estes autos.
 
-[LOCALIDADE/UF], data do sistema.
+[LOCALIDADE/UF], data de assinatura do sistema.

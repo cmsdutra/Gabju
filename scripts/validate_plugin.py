@@ -24,6 +24,7 @@ RESOURCE_LITERAL_RE = re.compile(
     r"`((?:[a-z0-9-]+/)?(?:references|assets|scripts)/[^`]+)`"
 )
 SKILL_CALL_RE = re.compile(r"\$([a-z0-9]+(?:-[a-z0-9]+)*)")
+HELP_SKILL = "ajuda"
 
 LOCAL_DEPENDENCIES = {
     "caminho absoluto local": re.compile(r"(?:/home/|[A-Za-z]:\\\\Users\\\\)"),
@@ -220,9 +221,15 @@ def validate_skills(errors: list[str]) -> int:
             errors.append(f"{skill_file.parent.relative_to(ROOT)}: políticas de invocação sem paridade")
 
     for skill_file, text in parsed:
-        for called_name in SKILL_CALL_RE.findall(text):
+        called_names = set(SKILL_CALL_RE.findall(text))
+        for called_name in called_names:
             if called_name not in names:
                 errors.append(f"{skill_file.relative_to(ROOT)}: skill chamada não empacotada (${called_name})")
+        if skill_file.parent.name == HELP_SKILL:
+            for missing in sorted(names - called_names):
+                errors.append(f"{skill_file.relative_to(ROOT)}: skill ausente do mapa de ajuda (${missing})")
+    if HELP_SKILL not in names:
+        errors.append(f"skills/{HELP_SKILL}: skill de ajuda obrigatória ausente")
     return len(skill_files)
 
 

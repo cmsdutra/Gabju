@@ -24,4 +24,4 @@ A Secretaria da Vara deverá:
 
 **(i)** [...] // Lista das providências exigidas da secretaria (intimar a parte autora para juntar um documento, promover retificação da autuação, trasladar documento para outros autos, concluir os autos após providências etc.)
 
-[LOCALIDADE/UF], data do sistema.
+[LOCALIDADE/UF], data de assinatura do sistema.

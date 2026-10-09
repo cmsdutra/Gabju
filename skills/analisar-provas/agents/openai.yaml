@@ -4,4 +4,4 @@ interface:
   default_prompt: "Use $analisar-provas para analisar as provas frente às hipóteses fáticas controvertidas."
 
 policy:
-  allow_implicit_invocation: false
+  allow_implicit_invocation: true

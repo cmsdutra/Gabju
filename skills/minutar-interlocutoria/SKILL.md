@@ -1,6 +1,6 @@
 ---
 name: minutar-interlocutoria
-description: Redige fundamentação de decisão interlocutória geral (exclui embargos, saneamento e tutela provisória — skills próprias). Usar só com invocação expressa de minutar-interlocutoria ou pedido expresso de minuta/análise/julgamento/redação de decisão interlocutória geral.
+description: Analisa e minuta decisões interlocutórias gerais, completas por padrão; partes isoladas somente quando expressamente solicitadas. Abrange decisão interlocutória geral (exclui embargos, saneamento e tutela provisória — skills próprias). Usar só com invocação expressa de minutar-interlocutoria ou pedido expresso de minuta/análise/julgamento/redação de decisão interlocutória geral.
 ---
 
 # /minutar-interlocutoria
@@ -12,6 +12,15 @@ Leia [personalização do gabinete](../../references/personalizacao.md) ao aplic
 ## Leitura dos anexos
 
 Quando precisar consultar anexos, tente primeiro a leitura direta. Se houver dificuldade concreta que impeça acessar o conteúdo necessário, acione $indexar-pdf somente para os PDFs afetados, informando a dificuldade observada. Tamanho e quantidade de páginas isolados não justificam indexação. Reutilize os textos recuperados e os diagnósticos ao retomar esta skill, preservando seu escopo e checkpoints.
+
+## Escopo da entrega
+
+Pedidos para minutar, redigir, elaborar ou preparar este ato produzem, por padrão, a minuta completa, mesmo sem as palavras "completa", "integral" ou "inteira". A invocação desta skill pelo nome também segue esse padrão. Conduza esses pedidos pelo $minutar-completa.
+
+Entregue partes isoladas apenas quando o usuário delimitar expressamente o escopo, por exemplo, "redija a fundamentação", "somente o relatório", "apenas o dispositivo" ou "relatório e fundamentação, sem dispositivo". Pedidos exclusivos de análise ou julgamento não iniciam a redação de uma minuta sem solicitação. Preserve os checkpoints de deliberação e de plano de argumentação.
+
+Quando chamada por $minutar-completa, execute apenas a etapa atribuída, devolva o texto à skill coordenadora e não a acione novamente. Na execução parcial, redija somente as seções solicitadas, ainda que o template contenha outras seções.
+
 
 Esta skill conduz a elaboração da fundamentação de decisões interlocutórias gerais, de acordo com templates e regras de estilo especificadas.
 
@@ -197,7 +206,7 @@ Orientações:
 2. Siga a estrutura do template, preenchendo cada bloco conforme as instruções nele contidas, observando as regras de estilo e o plano de argumentação aprovado na Etapa 2, utilizando-o como guia para cada parágrafo, sem citá-lo como fonte.
 3. Inicie a fundamentação com o resumo das questões pendentes, conforme o template; se houver uma única questão pendente e encaminhamento evidente, dispense o resumo inicial e comece diretamente pela premissa decisória.
 4. Agrupe questões quando compartilharem a mesma premissa fático-jurídica e separe-as em tópicos quando forem autônomas.
-5. Inclua, na fundamentação, a razão concreta da providência prática, sem fórmulas justificativas abstratas como "a solução visa...", "essa solução harmoniza..." ou equivalentes. Não redija comandos de dispositivo, salvo pedido expresso do usuário. Corte parágrafo conclusivo que só antecipa o dispositivo quando a premissa decisória já estiver demonstrada. Quando o usuário pedir dispositivo, acione `minutar-dispositivo`: `minutar-dispositivo/references/estrutura.md` para heading/numeração/caixa do verbo/regra de preliminares (inclusive a exceção para decisão que julga conjunto de teses, ex. impugnação ao cumprimento de sentença), `minutar-dispositivo/references/catalogo-especies.md` § Decisão Interlocutória Geral e `minutar-dispositivo/references/circunstancias.md` para honorários, custas, execução invertida etc. Preferir comandos operacionais com verbo em destaque, no infinitivo, e texto direto; concentrar detalhes executivos no próprio comando quando necessários ao cumprimento; evitar enumerar indeferimentos acessórios já abrangidos pela rejeição do pedido principal. Nas providências de impulso: evitar repetir integralmente comandos do dispositivo; quando adequado, referenciar o item deliberativo e reservar as providências seguintes para atos concretos de secretaria.
+5. Inclua, na fundamentação, a razão concreta da providência prática, sem fórmulas justificativas abstratas como "a solução visa...", "essa solução harmoniza..." ou equivalentes. Na etapa interna de fundamentação ou quando o usuário pedir somente essa seção, não redija comandos de dispositivo. Na minuta completa, inclua o dispositivo pela coordenação de $minutar-completa. Corte parágrafo conclusivo que só antecipa o dispositivo quando a premissa decisória já estiver demonstrada. Para redigir o dispositivo solicitado ou integrar a minuta completa, acione `minutar-dispositivo`: `minutar-dispositivo/references/estrutura.md` para heading/numeração/caixa do verbo/regra de preliminares (inclusive a exceção para decisão que julga conjunto de teses, ex. impugnação ao cumprimento de sentença), `minutar-dispositivo/references/catalogo-especies.md` § Decisão Interlocutória Geral e `minutar-dispositivo/references/circunstancias.md` para honorários, custas, execução invertida etc. Preferir comandos operacionais com verbo em destaque, no infinitivo, e texto direto; concentrar detalhes executivos no próprio comando quando necessários ao cumprimento; evitar enumerar indeferimentos acessórios já abrangidos pela rejeição do pedido principal. Nas providências de impulso: evitar repetir integralmente comandos do dispositivo; quando adequado, referenciar o item deliberativo e reservar as providências seguintes para atos concretos de secretaria.
 6. Ao redigir fatos relevantes à questão, diferencie rigorosamente alegações das partes e prova. Petições, contestações, réplicas, manifestações e razões recursais não devem ser tratadas como prova de fatos controvertidos, salvo para avaliar confissão, anuência, reconhecimento do pedido, fato incontroverso, renúncia, desistência, delimitação da lide ou outra declaração processual atribuível à própria parte.
 7. Antes de entregar a resposta ao usuário, faça uma reflexão silenciosa, certificando-se de que a redação obedeceu as regras de estilo, o template e o plano de argumentação. Verifique especificamente se não foram usadas frases-tópico soltas ou metadiscursivas, como "Esse ponto é decisivo" ou fórmulas equivalentes, e se as petições das partes não foram usadas como elementos probatórios indevidos. Caso não tenha obedecido, faça os ajustes necessários.
 
